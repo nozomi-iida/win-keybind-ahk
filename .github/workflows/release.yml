@@ -13,7 +13,7 @@ jobs:
 
       - name: Install AutoHotkey v2
         run: |
-          choco install autohotkey --version=2.0.18 -y
+          choco install autohotkey -y
 
       - name: Compile to exe
         run: |

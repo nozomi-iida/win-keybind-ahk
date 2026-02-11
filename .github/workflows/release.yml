@@ -11,13 +11,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install AutoHotkey v2
-        run: choco install autohotkey -y
+      - name: Download and Setup AutoHotkey v2
+        run: |
+          Invoke-WebRequest -Uri "https://www.autohotkey.com/download/ahk-v2.zip" -OutFile "ahk-v2.zip"
+          Expand-Archive -Path "ahk-v2.zip" -DestinationPath "ahk"
 
       - name: Compile to exe
         run: |
-          $compiler = Get-ChildItem -Path "C:\Program Files\AutoHotkey" -Recurse -Filter "Ahk2Exe.exe" | Select-Object -First 1
-          & $compiler.FullName /in "windows_keybind_ahk.ahk" /out "windows_keybind_ahk.exe"
+          .\ahk\Compiler\Ahk2Exe.exe /in "windows_keybind_ahk.ahk" /out "windows_keybind_ahk.exe" /silent
 
       - name: Create Release
         uses: softprops/action-gh-release@v2

@@ -11,10 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download and Setup AutoHotkey v2
+      - name: Download AutoHotkey v2 from GitHub
         run: |
-          Invoke-WebRequest -Uri "https://www.autohotkey.com/download/ahk-v2.zip" -OutFile "ahk-v2.zip"
-          Expand-Archive -Path "ahk-v2.zip" -DestinationPath "ahk"
+          Invoke-WebRequest -Uri "https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.18/AutoHotkey_2.0.18.zip" -OutFile "ahk.zip"
+          Expand-Archive -Path "ahk.zip" -DestinationPath "ahk"
 
       - name: Compile to exe
         run: |
